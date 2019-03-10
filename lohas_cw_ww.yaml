@@ -1,0 +1,74 @@
+## LOHAS CW WW Smart Bulb with ESPHome
+
+esphome:
+  name: lohas_cw_ww_1
+  platform: ESP8266
+  board: esp01_1m
+  includes:
+    - copychan.h
+
+Change the WiFi SSID and Password below and remove this line to clear the error
+wifi:
+  ssid: 'SampleSSID'  
+  password: 'SamplePassword'
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+# Enable MQTT if you are using it over the HA API
+#mqtt:
+#  broker: '192.168.1.x'
+#  username: 'MQTT_User'
+#  password: 'MQTT_Password'
+
+ota:
+  
+my9231:
+ data_pin: GPIO13  
+ clock_pin: GPIO15 
+ num_channels: 4
+ num_chips: 1
+
+output:
+  - platform: my9231
+    id: output_cw1
+    channel: 0
+  - platform: my9231
+    id: output_cw2
+    channel: 2
+  - platform: my9231
+    id: output_ww1
+    channel: 1
+  - platform: my9231
+    id: output_ww2
+    channel: 3
+  - platform: custom
+    type: float
+    lambda: |-
+      auto *copy = new CopyOutput();
+      copy->channel_a = id(output_cw1); 
+      copy->channel_b = id(output_cw2);
+      return {copy};
+    outputs:
+    - id: cw
+  - platform: custom
+    type: float
+    lambda: |-
+      auto *copy = new CopyOutput();
+      copy->channel_a = id(output_ww1); 
+      copy->channel_b = id(output_ww2);
+      return {copy};
+    outputs:
+    - id: ww
+    
+light:
+  - platform: cwww
+    name: "Lohas CW_WW_1"
+    default_transition_length: 0s
+    cold_white: cw
+    warm_white: ww
+    cold_white_color_temperature: 6500 K
+    warm_white_color_temperature: 2000 K

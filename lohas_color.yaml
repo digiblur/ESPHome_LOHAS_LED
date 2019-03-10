@@ -1,0 +1,68 @@
+## LOHAS RGBW Smart Bulb with ESPHome
+
+esphome:
+  name: lohas_color1
+  platform: ESP8266
+  board: esp01_1m
+  includes:
+    - copychan.h
+
+Change the WiFi SSID and Password below and remove this line to clear the error
+wifi:
+  ssid: 'SampleSSID'  
+  password: 'SamplePassword'
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+# Enable MQTT if you are using it over the HA API
+#mqtt:
+#  broker: '192.168.1.x'
+#  username: 'MQTT_User'
+#  password: 'MQTT_Password'
+
+ota:
+  
+my9231:
+ data_pin: GPIO13  
+ clock_pin: GPIO15  
+ num_channels: 6
+ num_chips: 2 
+ 
+output:
+  - platform: my9231
+    id: output_blue
+    channel: 3
+  - platform: my9231
+    id: output_red
+    channel: 5
+  - platform: my9231
+    id: output_green
+    channel: 4
+  - platform: my9231
+    id: output_cw1
+    channel: 1
+  - platform: my9231
+    id: output_cw2
+    channel: 2
+  - platform: custom
+    type: float
+    lambda: |-
+      auto *copy = new CopyOutput();
+      copy->channel_a = id(output_cw1);
+      copy->channel_b = id(output_cw2);
+      return {copy}; 
+    outputs:
+    - id: cw
+
+light:
+  - platform: rgbw
+    name: "Lohas Color1"
+    default_transition_length: 0s
+    red: output_red
+    green: output_green
+    blue: output_blue
+    white: cw
