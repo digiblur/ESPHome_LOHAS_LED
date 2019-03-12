@@ -2,7 +2,7 @@
 
 The LOHAS LED Bulbs utilize dual channels of warm white and cool white LEDs on the MY9231/MY9291 LED drivers.  We show in ESPHome how to solve this issue with a custom component.  All of the sample configurations used in the video can be found at the GitHub link below.  The Anoop bulb is a dual channel PWM light shown in Tasmota.  We also show how to easily configure the device using the new copy and paste templates of Tasmota.
 
-Video Demostration and Setup - 
+Video Demostration and Setup - https://www.youtube.com/watch?v=fTb6n6flJIw
 
 ### Lights
 [LOHAS Color LED](https://amzn.to/2U7np3p) or [LOHAS 3 Pack](https://amzn.to/2VPfYhH)  
