@@ -6,7 +6,7 @@ Video Demostration and Setup -
 
 ### Lights
 [LOHAS Color LED](https://amzn.to/2U7np3p) or [LOHAS 3 Pack](https://amzn.to/2VPfYhH)  
-[LOHAS CW/WW LED](https://amzn.to/2U8L1Vm)
+[LOHAS CW/WW LED](https://amzn.to/2U8L1Vm)  
 [Anoopsyche CW/WW LED](https://amzn.to/2VLE790)
 [Amazon US Link](https://amzn.to/2DDNYI4)
 
