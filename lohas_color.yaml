@@ -3,6 +3,8 @@
 esphome:
   name: lohas_color1
   platform: ESP8266
+# Remove this line below if you do not want the bulb to remember the last on/off color state
+  esp8266_restore_from_flash: true
   board: esp01_1m
   includes:
     - copychan.h
