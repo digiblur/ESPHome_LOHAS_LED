@@ -1,5 +1,3 @@
-using namespace esphomelib::output;
-
 class CopyOutput : public FloatOutput {
  public:
   FloatOutput *channel_a;
