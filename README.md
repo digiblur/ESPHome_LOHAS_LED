@@ -5,8 +5,10 @@ The LOHAS LED Bulbs utilize dual channels of warm white and cool white LEDs on t
 Video Demostration and Setup - https://www.youtube.com/watch?v=fTb6n6flJIw
 
 ### Lights
-[LOHAS Color LED](https://amzn.to/2U7np3p) or [LOHAS 3 Pack](https://amzn.to/2VPfYhH)  
-[LOHAS CW/WW LED](https://amzn.to/2U8L1Vm)  
+[LOHAS Color](https://amzn.to/2M9Dzqh)  
+[LOHAS CW/WW LED](https://amzn.to/2U8L1Vm) 
+[LOHAS 100w Equiv](https://amzn.to/2OhNNaJ) 
+
 [Anoopsyche CW/WW LED](https://amzn.to/2VLE790)  
 [Amazon US Link](https://amzn.to/2DDNYI4)
 
@@ -14,4 +16,4 @@ LOHAS ESPHome Configurations and CopyChan component are located in this GitHub R
 
 [Home Assistant Sample MQTT Configurations](https://github.com/digiblur/Sonoff-Tasmota/wiki/Smart-Bulbs)
 
-Tuya Convert Process - https://www.youtube.com/watch?v=O5GYh470m5k
+Tuya Convert Process 2.0 - https://www.youtube.com/watch?v=dyUyewiKpRA
