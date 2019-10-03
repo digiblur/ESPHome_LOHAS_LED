@@ -6,7 +6,7 @@ Video Demostration and Setup - https://www.youtube.com/watch?v=fTb6n6flJIw
 
 ### Lights
 [LOHAS Color](https://amzn.to/2M9Dzqh)  
-[LOHAS CW/WW LED](https://amzn.to/2U8L1Vm) 
+[LOHAS CW/WW LED](https://amzn.to/2U8L1Vm)   
 [LOHAS 100w Equiv](https://amzn.to/2OhNNaJ) 
 
 [Anoopsyche CW/WW LED](https://amzn.to/2VLE790)  
