@@ -1,0 +1,80 @@
+substitutions:
+  display_name: Lohas BigColor1
+
+esphome:
+  name: lohas_bigcolor1
+  platform: ESP8266
+  board: esp01_1m
+  esp8266_restore_from_flash: true
+  includes:
+    - copychan3.h
+    
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  manual_ip:
+    static_ip: !secret ip_lohas_bigcolor1
+    gateway: !secret ip_gateway
+    subnet: !secret ip_subnet
+    dns1: !secret ip_dns1
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+#api:
+
+ota:
+
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+  
+web_server:
+
+my9231:
+ data_pin: GPIO13  # GPIO13 for AiLight
+ clock_pin: GPIO15  # GPIO15 for AiLight
+ num_channels: 6
+ num_chips: 2 
+
+ 
+output:
+  - platform: my9231
+    id: output_blue
+    channel: 3
+  - platform: my9231
+    id: output_red
+    channel: 5
+  - platform: my9231
+    id: output_green
+    channel: 4
+  - platform: my9231
+    id: output_cw0
+    channel: 0
+  - platform: my9231
+    id: output_cw1
+    channel: 1
+  - platform: my9231
+    id: output_cw2
+    channel: 2
+  - platform: custom
+    type: float
+    lambda: |-
+      auto *copy = new CopyOutput();
+      copy->channel_a = id(output_cw0);
+      copy->channel_b = id(output_cw1);
+      copy->channel_c = id(output_cw2);
+      return {copy}; 
+    outputs:
+    - id: cw
+
+light:
+  - platform: rgbw
+    name: ${display_name}
+    default_transition_length: 0s
+    red: output_red
+    green: output_green
+    blue: output_blue
+    white: cw
