@@ -1,0 +1,69 @@
+substitutions:
+  display_name: Lohas_CCT
+  
+esphome:
+  name: lohas_cct
+  platform: ESP8266
+  board: esp01_1m
+  esp8266_restore_from_flash: true
+  
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  manual_ip:
+    static_ip: !secret ip_lohas_cct
+    gateway: !secret ip_gateway
+    subnet: !secret ip_subnet
+    dns1: !secret ip_dns1
+  ap:
+    ssid: ${display_name}_AP
+    password: !secret wifi_pass
+    ap_timeout: 3min    
+
+captive_portal:
+
+logger:
+
+ota:
+
+web_server: 
+
+#api:
+
+mqtt:
+  broker: !secret mqtt_broker
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+
+switch:
+  - platform: restart
+    name: ${display_name} Restart
+
+output:
+  - platform: esp8266_pwm
+    id: output_red
+    pin: GPIO5
+  - platform: esp8266_pwm
+    id: output_green
+    pin: GPIO4
+  - platform: esp8266_pwm
+    id: output_blue
+    pin: GPIO13
+  - platform: esp8266_pwm
+    id: output_cold_white
+    pin: GPIO14
+  - platform: esp8266_pwm
+    id: output_warm_white
+    pin: GPIO12
+
+light:
+  - platform: rgbww
+    name: ${display_name}
+    red: output_red
+    green: output_green
+    blue: output_blue
+    default_transition_length: 1s
+    warm_white: output_warm_white
+    cold_white: output_cold_white
+    cold_white_color_temperature: 6000 K
+    warm_white_color_temperature: 2700 K
