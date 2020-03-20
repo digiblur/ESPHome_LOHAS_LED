@@ -1,0 +1,70 @@
+substitutions:
+  display_name: DIY_Sense
+
+esphome:
+  name: diysense
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_pass
+  manual_ip:
+    static_ip: !secret ip_diysense
+    gateway: !secret ip_gateway
+    subnet: !secret ip_subnet
+    dns1: !secret ip_dns1
+  ap: #since we listed an SSID above, this AP mode will only enable if no WiFi connection could be made
+    ssid: ${display_name}_AP
+    password: !secret wifi_pass
+    ap_timeout: 3min
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+web_server:
+
+binary_sensor:
+  - platform: gpio
+    pin: D6
+    name: ${display_name} Motion
+    device_class: motion
+    
+light:
+  - platform: fastled_clockless
+    chipset: WS2812
+    pin: D5
+    num_leds: 1
+    rgb_order: RGB
+    name: ${display_name} LED    
+    
+i2c:
+  sda: D2
+  scl: D1
+  scan: True 
+  
+sensor:
+  - platform: bme280
+    temperature:
+      name: ${display_name} Temp
+      oversampling: 2x
+    pressure:
+      name: ${display_name} Pressure
+      oversampling: 2x
+    humidity:
+      name: ${display_name} Humidity
+      oversampling: 2x
+    address: 0x76
+    update_interval: 30s    
+    
+status_led:
+  pin:
+    number: D0
+    inverted: True 
