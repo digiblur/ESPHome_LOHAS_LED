@@ -59,6 +59,8 @@ output:
 light:
   - platform: rgbww
     name: ${display_name}
+    constant_brightness: true
+    color_interlock: true
     red: output_red
     green: output_green
     blue: output_blue
