@@ -6,8 +6,6 @@ esphome:
   platform: ESP8266
   board: esp01_1m
   esp8266_restore_from_flash: true
-  includes:
-    - copychan3.h
     
 wifi:
   ssid: !secret wifi_ssid
@@ -59,16 +57,19 @@ output:
   - platform: my9231
     id: output_cw2
     channel: 2
-  - platform: custom
+  - platform: template
+    id: cw
     type: float
-    lambda: |-
-      auto *copy = new CopyOutput();
-      copy->channel_a = id(output_cw0);
-      copy->channel_b = id(output_cw1);
-      copy->channel_c = id(output_cw2);
-      return {copy}; 
-    outputs:
-    - id: cw
+    write_action:
+    - output.set_level:
+          id: output_cw0
+          level: !lambda 'return state;'
+      - output.set_level:
+          id: output_cw1
+          level: !lambda 'return state;'
+      - output.set_level:
+          id: output_cw2
+          level: !lambda 'return state;'
 
 light:
   - platform: rgbw

@@ -6,8 +6,7 @@ esphome:
 # Remove this line below if you do not want the bulb to remember the last on/off color state
   esp8266_restore_from_flash: true
   board: esp01_1m
-  includes:
-    - copychan.h
+  
 
 Change the WiFi SSID and Password below and remove this line to clear the error
 wifi:
@@ -47,24 +46,26 @@ output:
   - platform: my9231
     id: output_ww2
     channel: 3
-  - platform: custom
+  - platform: template
+    id: cw
     type: float
-    lambda: |-
-      auto *copy = new CopyOutput();
-      copy->channel_a = id(output_cw1); 
-      copy->channel_b = id(output_cw2);
-      return {copy};
-    outputs:
-    - id: cw
-  - platform: custom
+    write_action:
+      - output.set_level:
+          id: output_cw1
+          level: !lambda 'return state;'
+      - output.set_level:
+          id: output_cw2
+          level: !lambda 'return state;'
+  - platform: template
+    id: ww
     type: float
-    lambda: |-
-      auto *copy = new CopyOutput();
-      copy->channel_a = id(output_ww1); 
-      copy->channel_b = id(output_ww2);
-      return {copy};
-    outputs:
-    - id: ww
+    write_action:
+      - output.set_level:
+          id: output_ww1
+          level: !lambda 'return state;'
+      - output.set_level:
+          id: output_ww2
+          level: !lambda 'return state;'
     
 light:
   - platform: cwww
